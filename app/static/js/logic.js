@@ -13,11 +13,12 @@
 
 
 function gifLoad(){
-    $("body").append('<div class="scrapeLoad"><img src="/static/img/load.gif"></div>');
+    d3.select("body").append('<div class="scrapeLoad"><img src="/static/img/load.gif"></div>');
   }
-  function gifRemove(){
-    setTimeout(function(){ $(".scrapeLoad").addClass("hideGif"); }, 3000);
-  }
+  
+function gifRemove(){
+setTimeout(function(){ $(".scrapeLoad").addClass("hideGif"); }, 3000);
+}
 
   button.on("click", function () {
     gifLoad()
