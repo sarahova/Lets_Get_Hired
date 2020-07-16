@@ -11,16 +11,16 @@
 //     console.log(result)
 // });
 
-var button=d3.select('#submitButton')
+//var button=d3.select('#submitButton')
 
-function gifLoad(){
-    d3.select("#loading").append('<div class="scrapeLoad"><img src="/static/img/load.gif"></div>');
-  }
+//function gifLoad(){
+//    d3.select("#loading").append('<div class="scrapeLoad"><img src="/static/img/trump.gif"/></div>');
+//  }
   
-function gifRemove(){
-setTimeout(function(){ $(".scrapeLoad").addClass("hideGif"); }, 3000);
-}
+//function gifRemove(){
+//setTimeout(function(){ $(".scrapeLoad").addClass("hideGif"); }, 3000);
+//}
 
-button.on("click", function () {
-    gifLoad()
-  })
+//button.on("click", function () {
+//    gifLoad()
+//  })

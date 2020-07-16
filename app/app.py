@@ -28,7 +28,7 @@ def send():
 
 
 
-        return render_template('results2.html', result=result, position=position)
+        return render_template('results.html', result=result, position=position)
 
 
 if __name__ == '__main__':

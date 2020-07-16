@@ -1,0 +1,19 @@
+.scrapeLoad{
+    position: fixed;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    z-index: 1000;
+    border: solid;
+    background: rgba(41, 128, 185, 0.9);
+    text-align: center;
+  }
+  
+.scrapeLoad img{
+  margin-top: 200px;
+}
+
+.hideGif{
+    display:none;
+  }
