@@ -2,4 +2,4 @@
 
 
 
-![alt text](\app\static\img\Indeed.png "Diagram")
+![image](\app\static\img\Indeed.png "Diagram")
