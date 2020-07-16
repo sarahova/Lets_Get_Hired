@@ -2,4 +2,7 @@
 
 
 
-![image](\app\static\img\Indeed.png "Diagram")
+![Diagram](app/static/img/Indeed.png)
+
+
+Made with love
