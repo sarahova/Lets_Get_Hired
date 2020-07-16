@@ -9,7 +9,7 @@
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   <!--d3 CDN-->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.1/d3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.js"></script>
   
   <!--Plotly CDN-->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -28,26 +28,17 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-offset-2 col-md-8">
-        <form method="POST" action="/results" role="form", name="jobSearch">
-            <div class="form-group">
-                <label for="inputName">Job Title</label>
-                <input type="text" class="form-control" id="inputName" name="jobInput" placeholder="Job Title">
-            </div>
-            <input type="submit" value="Submit" class="btn btn-default" id='submitButton'>
-        </form>
-    </div>
+    <div id='results'>
+      <h1>Current Top Skills for a {{jobSearch}}</h1>
+        <p> Results: {{result}}</p>
     </div>
 
-    <div id='loading'></div>
-</div> 
-    
+</div>  
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.min.js"></script>
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.9.1/d3-tip.js"></script> -->
 
   <!-- Our JS -->
-  <script type="text/javascript" src="/static/js/logic.js"></script>
+  <!-- <script type="text/javascript" src="/static/js/logic.js"></script> -->
 </body>
 </html>

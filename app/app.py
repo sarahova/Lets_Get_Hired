@@ -3,7 +3,8 @@ from flask import (
     render_template,
     jsonify,
     request,
-    redirect)
+    redirect,
+    make_response)
 import time
 
 from run import run_all
@@ -22,11 +23,12 @@ def send():
         jobSearch = request.form["jobInput"]
 
         ####scrape
-        result=run_all(jobSearch)
+        result, position = run_all(jobSearch)
+        #result = make_response(jsonify(result), 200)
 
 
 
-        return render_template('results.html', result=result)
+        return render_template('results2.html', result=result, position=position)
 
 
 if __name__ == '__main__':

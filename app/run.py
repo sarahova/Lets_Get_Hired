@@ -55,9 +55,9 @@ def get_all_links_in_page(url):
     soup=bs(page.text, 'lxml')
     page_list=soup.find('ul', class_='pagination-list')
     try:
-      page_len=len(page_list.find_all('li'))
+        page_len=len(page_list.find_all('li'))
     except:
-      print('something went wrong')
+        print('something went wrong')
 
     job_listings=soup.find_all('div', attrs={'class': 'jobsearch-SerpJobCard'})
     for listing in job_listings:
@@ -80,15 +80,15 @@ def get_all_url_from_job(page, position, location, timeline):
 
 
 def scrape(url):
-  try:
-    response=requests.get(url)
-    soup=bs(response.text, 'lxml')
-    text=soup.find('div', id='jobDescriptionText').text.strip()
-  except:
-    text=''  
-    print(url)
-    print('empty')
-  return text
+    try:
+        response=requests.get(url)
+        soup=bs(response.text, 'lxml')
+        text=soup.find('div', id='jobDescriptionText').text.strip()
+    except:
+        text=''  
+        print(url)
+        print('empty')
+    return text
 
 
 
@@ -219,8 +219,8 @@ def run_all(string):
         filtered_sentence = [] 
 
         for w in word_tokens: 
-          if w not in stop_words: 
-              filtered_sentence.append(w) 
+            if w not in stop_words: 
+                filtered_sentence.append(w) 
         filtered_sentence_join = ' '.join(filtered_sentence)
 
         corpus[i] = filtered_sentence_join
@@ -231,16 +231,16 @@ def run_all(string):
 
     top_words = get_top_n_words(corpus, n=10)
     top_df = pd.DataFrame(top_words)
-    top_df.columns=["Skill", "Freq"]
+    top_df.columns=["label", "y"]
 
     top2_words = get_top_n2_words(corpus, n=10)
     top2_df = pd.DataFrame(top2_words)
-    top2_df.columns=["Skill", "Freq"]
+    top2_df.columns=["label", "y"]
 
     top_df = top_df.append(top2_df)
-    top_df.sort_values('Freq', ascending=False, inplace=True)
+    top_df.sort_values('y', ascending=True, inplace=True)
     print(top_df.to_json(orient='records'))
-    return  top_df.to_json(orient='records')
+    return  top_df.to_dict(orient='records'), position
     
 
 if __name__ == '__main__':
