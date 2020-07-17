@@ -154,6 +154,7 @@ def get_top_n2_words(corpus, n=None):
 def run_all(string):
 
     multi=False
+    workers = 2
 
     position=string
 
@@ -209,25 +210,25 @@ def run_all(string):
 
     # text_list = [p_text,p_text]
 
-
+    # remove stopwords
     for i in range(0,len(corpus)):
 
         word_tokens = word_tokenize(corpus[i])
 
         filtered_sentence = [w for w in word_tokens if not w in stop_words] 
 
-        filtered_sentence = [] 
+        # filtered_sentence = [] 
 
-        for w in word_tokens: 
-            if w not in stop_words: 
-                filtered_sentence.append(w) 
+        # for w in word_tokens: 
+        #     if w not in stop_words: 
+        #         filtered_sentence.append(w) 
         filtered_sentence_join = ' '.join(filtered_sentence)
 
         corpus[i] = filtered_sentence_join
 
 
-    cv=CountVectorizer(max_df=0.8,stop_words=stop_words, max_features=10000, ngram_range=(2,3))
-    X=cv.fit_transform(corpus)
+    # cv=CountVectorizer(max_df=0.8,stop_words=stop_words, max_features=10000, ngram_range=(2,3))
+    # X=cv.fit_transform(corpus)
 
     top_words = get_top_n_words(corpus, n=10)
     top_df = pd.DataFrame(top_words)

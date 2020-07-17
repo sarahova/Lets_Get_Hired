@@ -1,0 +1,19 @@
+Future Directions:
+
+1) Scraping
+	- add multiprocessing
+
+2) Text pre-processing
+	- add lemmatization/stemming (get the root of each word)
+		e.g. "researches" -> "research"
+	- part of speech tagging
+		i.e. what's a noun, verb, etc..
+
+3) Text analysis
+	- deep learning/training
+		- infer/extract skills instead of hardcoding/finding
+		- probably need to manually label a training dataset
+
+4) front-end / deploy
+	- streamlit or plotly/dash
+	- deploy with heroku or digital ocean
