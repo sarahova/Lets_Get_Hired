@@ -23,12 +23,12 @@ def send():
         jobSearch = request.form["jobInput"]
 
         ####scrape
-        result, position = run_all(jobSearch)
+        result, position, count_of_jobs = run_all(jobSearch)
         #result = make_response(jsonify(result), 200)
 
 
 
-        return render_template('results.html', result=result, position=position)
+        return render_template('results.html', result=result, position=position, count_of_jobs=count_of_jobs)
 
 
 if __name__ == '__main__':

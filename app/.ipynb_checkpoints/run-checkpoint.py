@@ -24,12 +24,12 @@ from nltk.stem.wordnet import WordNetLemmatizer
 
 from multiprocessing import Pool
 
-import multiprocessing
+#import multiprocessing
 
 from skills import skills
 
 
-
+import concurrent.futures
 
 
 ##Creating a list of stop words and adding custom stopwords
@@ -152,8 +152,9 @@ def get_top_n2_words(corpus, n=None):
 
 
 def run_all(string):
-
+    MAX_THREAD = 30
     multi=False
+    workers = 2
 
     position=string
 
@@ -174,11 +175,11 @@ def run_all(string):
     total_jobs = get_total_jobs(url)
 
     if multi:
-        # multiprocessing
-        p = Pool(workers)
-        prelim_job_list = p.map(get_all_url_from_job, list(range(0,int(total_jobs/10))))
-        p.terminate()
-        p.join()
+        # multithreading
+        threads = min(MAX_THREADS, len(list(range(0,int(total_jobs/10)))))
+        with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
+            prelim_job_list = executor.map(lambda p: get_all_url_from_job(p, position, location, 
+                                                                          timeline),list(range(0,int(total_jobs/10)) ))
 
     else:
         #single_process
@@ -191,10 +192,10 @@ def run_all(string):
 
 
     if multi:
-        p = Pool(workers)
-        corpus = p.map(scrape, job_list)
-        p.terminate()
-        p.join()
+        # multithreading
+        threads = min(MAX_THREADS, len(job_list))
+        with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
+            corpus = executor.map(scrape, job_list)
 
     else:
         corpus = []
@@ -209,25 +210,25 @@ def run_all(string):
 
     # text_list = [p_text,p_text]
 
-
+    # remove stopwords
     for i in range(0,len(corpus)):
 
         word_tokens = word_tokenize(corpus[i])
 
         filtered_sentence = [w for w in word_tokens if not w in stop_words] 
 
-        filtered_sentence = [] 
+        # filtered_sentence = [] 
 
-        for w in word_tokens: 
-            if w not in stop_words: 
-                filtered_sentence.append(w) 
+        # for w in word_tokens: 
+        #     if w not in stop_words: 
+        #         filtered_sentence.append(w) 
         filtered_sentence_join = ' '.join(filtered_sentence)
 
         corpus[i] = filtered_sentence_join
 
 
-    cv=CountVectorizer(max_df=0.8,stop_words=stop_words, max_features=10000, ngram_range=(2,3))
-    X=cv.fit_transform(corpus)
+    # cv=CountVectorizer(max_df=0.8,stop_words=stop_words, max_features=10000, ngram_range=(2,3))
+    # X=cv.fit_transform(corpus)
 
     top_words = get_top_n_words(corpus, n=10)
     top_df = pd.DataFrame(top_words)
@@ -244,4 +245,4 @@ def run_all(string):
     
 
 if __name__ == '__main__':
-    run_all('data scientist')
+    run_all('developer')

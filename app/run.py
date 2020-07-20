@@ -24,12 +24,12 @@ from nltk.stem.wordnet import WordNetLemmatizer
 
 from multiprocessing import Pool
 
-import multiprocessing
+#import multiprocessing
 
 from skills import skills
 
 
-
+import concurrent.futures
 
 
 ##Creating a list of stop words and adding custom stopwords
@@ -152,8 +152,8 @@ def get_top_n2_words(corpus, n=None):
 
 
 def run_all(string):
-
-    multi=False
+    MAX_THREADS = 30
+    multi=True
     workers = 2
 
     position=string
@@ -175,11 +175,11 @@ def run_all(string):
     total_jobs = get_total_jobs(url)
 
     if multi:
-        # multiprocessing
-        p = Pool(workers)
-        prelim_job_list = p.map(get_all_url_from_job, list(range(0,int(total_jobs/10))))
-        p.terminate()
-        p.join()
+        # multithreading
+        threads = min(MAX_THREADS, len(list(range(0,int(total_jobs/10)))))
+        with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
+            prelim_job_list = executor.map(lambda p: get_all_url_from_job(p, position, location, 
+                                                                          timeline),list(range(0,int(total_jobs/10)) ))
 
     else:
         #single_process
@@ -192,10 +192,10 @@ def run_all(string):
 
 
     if multi:
-        p = Pool(workers)
-        corpus = p.map(scrape, job_list)
-        p.terminate()
-        p.join()
+        # multithreading
+        threads = min(MAX_THREADS, len(job_list))
+        with concurrent.futures.ThreadPoolExecutor(max_workers=threads) as executor:
+            corpus = executor.map(scrape, job_list)
 
     else:
         corpus = []
@@ -241,8 +241,8 @@ def run_all(string):
     top_df = top_df.append(top2_df)
     top_df.sort_values('y', ascending=True, inplace=True)
     print(top_df.to_json(orient='records'))
-    return  top_df.to_dict(orient='records'), position
+    return  top_df.to_dict(orient='records'), position, len(job_list)
     
 
 if __name__ == '__main__':
-    run_all('data scientist')
+    run_all('developer')
