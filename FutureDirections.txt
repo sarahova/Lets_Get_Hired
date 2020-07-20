@@ -17,3 +17,4 @@ Future Directions:
 4) front-end / deploy
 	- streamlit or plotly/dash
 	- deploy with heroku or digital ocean
+	- add functionality for city search
