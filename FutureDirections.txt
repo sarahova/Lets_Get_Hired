@@ -1,7 +1,9 @@
-Future Directions:
+Features:
+- multiprocessing added
+- deployed on dash+heroku
 
-1) Scraping
-	- add multiprocessing
+
+Future Directions:
 
 2) Text pre-processing
 	- add lemmatization/stemming (get the root of each word)
@@ -15,6 +17,8 @@ Future Directions:
 		- probably need to manually label a training dataset
 
 4) front-end / deploy
-	- streamlit or plotly/dash
-	- deploy with heroku or digital ocean
+    - tidy up front end (right now it looks horrible lol)
 	- add functionality for city search
+
+
+
