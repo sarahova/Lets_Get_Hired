@@ -13,6 +13,20 @@ app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 server = app.server
 
+markdown_1 = """
+# JobBuddy!  
+_Search the skills that are in demand for your job_  
+  
+* type in a job title
+* press submit
+"""
+
+markdown_2 = """
+
+## How does it work?  
+
+![Diagram](app/static/img/Indeed.png)
+"""
 
 
 #app = dash.Dash()
@@ -20,8 +34,11 @@ server = app.server
 app.layout = html.Div([
  
     dbc.Container(
-    dbc.Alert("JobBuddy!", color="primary"),
+    #dbc.Alert("JobBuddy!", color="primary"),
+    dcc.Markdown(markdown_1),    
     ),
+    
+
     
     dbc.Container(
     dbc.Input(id='input-1-state', type='text', placeholder='Search job',
@@ -31,9 +48,21 @@ app.layout = html.Div([
     dbc.Container(
     dbc.Button(id='submit-button-state', n_clicks=0, children='Submit', color='primary'),
     ),
-    dbc.Spinner(html.Div(id="loading-output"), color='primary'),
-    html.Div(id='output-state')
+
     
+    dbc.Container(
+    dbc.Spinner(html.Div(id="loading-output",
+                        children = [html.Div(id='output-state')]), 
+                        color='primary'),
+                ),
+ 
+    html.Br(),
+    html.Br(),
+    html.Br(),
+    dbc.Container(
+
+    dcc.Markdown(markdown_2),    
+    )
         ])
 
 
