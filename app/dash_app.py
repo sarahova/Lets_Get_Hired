@@ -25,7 +25,7 @@ markdown_2 = """
 
 ## How does it work?  
 
-![Diagram](app/static/img/Indeed.png)
+![Diagram](https://i.imgur.com/DxlXxhh.png)
 """
 
 
