@@ -19,7 +19,7 @@ Bottleneck==1.2.1
 cached-property==1.5.1
 cachetools==3.1.0
 cement==2.8.2
-certifi==2019.11.28
+certifi==2022.12.7
 cffi==1.14.0
 cfn-lint==0.19.1
 chardet==3.0.4
